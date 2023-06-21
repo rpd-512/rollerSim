@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Roller Simulator</title>
+        <link rel="stylesheet" href="style.css">
+        <script src="https://cdn.jsdelivr.net/npm/p5@1.6.0/lib/p5.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+        <meta charset="UTF-8">
+
+    </head>
+    <body onmouseup="gridDraggable=true" onload="recreatFromJson()">
+        <div style="position: relative; z-index: 1;">
+            <div class="header" style="width: 100vw;" onmousedown="gridDraggable=false">
+                
+                <div id="toLeft">
+                    <a class="material-icons" href="#" style="font-size: 30px;">menu</a>
+                    <a class="saveButton" href="#">Save</a>
+                    <p class="filename" style="text-transform: none; overflow:hidden; text-overflow: ellipsis; max-width: 150px; white-space: nowrap;">File Name</p>
+                    <a class="material-icons" href="#" style="margin-left: 0;">arrow_drop_down</a>
+                </div>
+
+                <div class="titleOfHeader">
+                    Roller Sim
+                </div>
+
+                <div id="toRight">
+                    <p id="userMenuButton">user
+                        <a class="material-icons" href="#" style="margin-right: 0;">arrow_drop_down</a>
+                    </p>
+                    <a class="material-icons" href="#">share</a>
+                    <a class="material-icons" href="#">settings</a>
+                </div>    
+            </div>
+
+            <div class="listArea" onmousedown="gridDraggable=false">
+                <div class="listAreaHeader">
+                    <a class="material-icons" href="#" onclick="createComp()">add_circle</a>
+                    <div id="undoRedo">
+                        <a class="material-icons" href="#">undo</a>
+                        <a class="material-icons" href="#">redo</a>
+                    </div>
+                </div>
+
+                <div id="compList">
+                </div>
+                <div class="compDetailEditor">
+                    <div class="detailHolder">
+                        <a class="material-icons" href="#" style="margin-right: 0;transform: rotate(90deg); position: absolute;" onclick="backtoList()">arrow_drop_down</a>
+                        <div id="detailHeader">
+                        </div>
+                        <div id="editorTools">
+
+                            <div class="sliderEditor">
+                                <input type="number" value="100" oninput="updateTextInput(this.value, this.parentNode.querySelector('input[type=range]'),'size',elemCurEdit);">
+                                <div class="rangeLim">10</div>
+                                <div class="property">size</div>
+                                <input type="range" step="50" min="10" max="500" value="25" oninput="updateTextInput(this.value, this.parentNode.querySelector('input[type=number]'),'size',elemCurEdit);">
+                                <div class="rangeLim">500</div>
+                            </div>
+
+                            <div class="checkboxEditor">
+                                <input type="checkbox" oninput="updateCheckInput(this.checked,'gravity',elemCurEdit)" checked="componentData[elemCurEdit].componentPhysicsInfo.gravity">
+                                <label><i class="material-icons">check</i></label>
+                                <div class="checkboxLabel">fixed</div>
+                            </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="js/simulationWorker.js"></script>
+        <script src="js/p5.physics2D.js"></script>
+        <script src="js/testCodes.js"></script>
+        <script src="js/assetData.js"></script>
+        <script src="js/index.js"></script>
+    </body>
+</html>
