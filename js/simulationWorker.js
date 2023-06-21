@@ -10,7 +10,7 @@ var rollerWorld;
 
 function preload(){
     rollerWorld = new phy2DWorld;
-    rollerWorld.setGravityValue(0);
+    rollerWorld.setGravityValue(0.5);
 }
 
 function setup() {
